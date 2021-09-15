@@ -1,4 +1,6 @@
 .section-title {
     padding-bottom: 23px;
     border-bottom: 1px solid black;
+    width: calc(100% - 140px);
+    margin: auto;
 }

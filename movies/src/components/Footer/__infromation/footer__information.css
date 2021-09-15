@@ -1,0 +1,4 @@
+.footer__information {
+    display: flex;
+    justify-content: space-between;
+}

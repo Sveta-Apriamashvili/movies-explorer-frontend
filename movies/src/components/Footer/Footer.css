@@ -1,0 +1,7 @@
+.footer {
+    color: black;
+    width: calc(100% - 140px);
+    margin: 100px auto 0;
+    font-size: 13px;
+    line-height: 16px;
+}

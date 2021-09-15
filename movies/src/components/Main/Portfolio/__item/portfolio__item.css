@@ -1,0 +1,8 @@
+.portfolio__item {
+    padding-bottom: 19px;
+    border-bottom: 1px solid #E5E5E5;
+    margin: auto;
+    font-size: 30px;
+    line-height: 50px;
+    position: relative;
+}

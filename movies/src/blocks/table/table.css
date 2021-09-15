@@ -1,7 +1,7 @@
 .table {
     color: black;
-    margin-top: 70px;
-    margin-bottom: 110px;
     padding: 0;
     display: flex;
+    width: calc(100% - 140px);
+    margin: 70px auto 110px;
 }

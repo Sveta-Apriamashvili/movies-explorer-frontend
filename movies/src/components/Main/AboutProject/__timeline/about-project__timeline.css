@@ -1,0 +1,7 @@
+.about-project__timeline {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: calc(100% - 140px);
+    margin: auto;
+}

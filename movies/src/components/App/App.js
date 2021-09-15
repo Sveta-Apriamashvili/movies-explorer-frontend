@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from '../Footer/Footer';
 // import { Route, Switch, useHistory } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -10,6 +11,7 @@ function App() {
     <div className="page__container">
       <Header/>
       <Main/>
+      <Footer/>
     </div>
   );
 }

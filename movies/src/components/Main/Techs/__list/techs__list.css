@@ -1,0 +1,11 @@
+.techs__list{
+    list-style: none;
+    padding-top: 100px;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    grid-template-rows: auto;
+    gap: 10px;
+    width: calc(100% - 590px);
+    margin: 0 auto;
+}

@@ -1,0 +1,6 @@
+.about-me__information {
+    display: flex;
+    width: calc(100% - 140px);
+    margin: 70px auto 0;
+    justify-content: space-between;
+}
