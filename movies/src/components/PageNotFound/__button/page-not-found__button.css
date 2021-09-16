@@ -1,0 +1,10 @@
+.page-not-found__button {
+    text-align: center;
+    font-size: 14px;
+    line-height: 17px;
+    color: #3456F3;
+    margin: 0 auto;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}

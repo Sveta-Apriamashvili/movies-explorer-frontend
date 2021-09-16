@@ -63,3 +63,18 @@
 @import url(./components/Footer/__copyright/footer__copyright.css);
 @import url(./components/Footer/__links/footer__links.css);
 @import url(./components/Footer/__link/footer__link.css);
+
+@import url(./components/PageNotFound/PageNotFound.css);
+@import url(./components/PageNotFound/__container/page-not-found__container.css);
+@import url(./components/PageNotFound/__title/page-not-found__title.css);
+@import url(./components/PageNotFound/__subtitle/page-not-found__subtitle.css);
+@import url(./components/PageNotFound/__button/page-not-found__button.css);
+
+@import url(./blocks/auth/auth.css);
+@import url(./blocks/auth/__logo/auth__logo.css);
+@import url(./blocks/auth/__title/auth__title.css);
+@import url(./blocks/auth/__form/auth__form.css);
+@import url(./blocks/auth/__input-container/auth__input-container.css);
+@import url(./blocks/auth/__form-label/auth__form-label.css);
+@import url(./blocks/auth/__item/auth__item.css);
+@import url(./blocks/auth/__submit-button/auth__submit-button.css);
