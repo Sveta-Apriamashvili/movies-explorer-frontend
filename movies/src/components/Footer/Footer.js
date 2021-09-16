@@ -7,9 +7,9 @@ function Footer() {
             <div className="footer__information">
             <p className="footer__copyright">&copy; 2020</p>
             <ul className="footer__links">
-                <li><a href="f" className="footer__link">Яндекс.Практикум</a></li>
-                <li><a href="f" className="footer__link">Github</a></li>
-                <li><a href="f" className="footer__link">Facebook</a></li>
+                <li><a className="footer__link" href="https://practicum.yandex.ru" target="_blank" rel="noreferrer">Яндекс.Практикум</a></li>
+                <li><a className="footer__link" href="https://github.com/Sveta-Apriamashvili" target="_blank" rel="noreferrer">Github</a></li>
+                <li><a className="footer__link" href="https://www.linkedin.com/in/svetlana-apriamashvili-7291b5180/" target="_blank" rel="noreferrer">LinkedIn</a></li>
             </ul>
             </div>
         </footer>
