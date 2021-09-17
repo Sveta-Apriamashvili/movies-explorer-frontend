@@ -1,0 +1,11 @@
+.profile__item {
+    width: 100%;
+    border: 0;
+    box-sizing: border-box;
+    font-size: 11px;
+    line-height: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: end;
+}

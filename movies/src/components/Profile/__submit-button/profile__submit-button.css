@@ -1,0 +1,8 @@
+.profile__submit-button {
+    border: 0;
+    background-color: transparent;
+    font-size: 13px;
+    line-height: 16px;
+    width: 100%;
+    margin: 200px auto 0;
+}

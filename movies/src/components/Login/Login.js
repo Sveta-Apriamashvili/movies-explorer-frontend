@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 import logo_auth from '../../images/logo-auth.svg'
 
 function Login() {
@@ -15,6 +16,10 @@ function Login() {
                  <button className="auth__submit-button" type="submit">Войти</button>
              </div>
          </form>
+         <div className="auth__bottom-text">
+        <p>Ещё не зарегистрированы?</p>
+        <Link to="signup" className="auth__bottom-text_type_link">Регистрация</Link>
+      </div>
      </div>
  )
 }

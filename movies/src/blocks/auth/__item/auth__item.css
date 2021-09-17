@@ -4,10 +4,12 @@
     box-sizing: border-box;
     font-size: 13px;
     line-height: 16px;
-    margin-bottom: 42px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     background-color: #F9F9F9;
     height: 46px;
+    border-radius: 8px;
 }

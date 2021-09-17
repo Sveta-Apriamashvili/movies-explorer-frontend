@@ -78,3 +78,14 @@
 @import url(./blocks/auth/__form-label/auth__form-label.css);
 @import url(./blocks/auth/__item/auth__item.css);
 @import url(./blocks/auth/__submit-button/auth__submit-button.css);
+@import url(./blocks/auth/__bottom-text/auth__bottom-text.css);
+@import url(./blocks/auth/__bottom-text/_type/auth__bottom-text_type_link.css);
+
+@import url(./components/Profile/Profile.css);
+@import url(./components/Profile/__form/profile__form.css);
+@import url(./components/Profile/__form-label/profile__form-label.css);
+@import url(./components/Profile/__title/profile__title.css);
+@import url(./components/Profile/__input-items/profile__input-items.css);
+@import url(./components/Profile/__item/profile__item.css);
+@import url(./components/Profile/__submit-button/profile__submit-button.css);
+@import url(./components/Profile/__logout-link/profile__logout-link.css);

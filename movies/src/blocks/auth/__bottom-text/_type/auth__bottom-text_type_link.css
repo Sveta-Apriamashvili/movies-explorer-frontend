@@ -1,0 +1,8 @@
+.auth__bottom-text_type_link {
+    color: #3456F3;
+    text-decoration: none;
+}
+
+.auth__bottom-text_type_link:hover{
+    opacity: 0.6;
+}

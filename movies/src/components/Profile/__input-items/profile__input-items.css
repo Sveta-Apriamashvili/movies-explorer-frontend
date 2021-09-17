@@ -1,0 +1,10 @@
+.profile__input-items {
+    display: flex;
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 16px;
+    padding-top: 17px;
+}
+
+.profile__input-items:last-of-type {
+    border-bottom: none;
+}

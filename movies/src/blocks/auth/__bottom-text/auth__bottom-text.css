@@ -1,0 +1,11 @@
+.auth__bottom-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px auto;
+    color: #A0A0A0;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    gap: 6px;
+}
