@@ -4,7 +4,7 @@
     line-height: 16px;
     text-decoration: none;
     color: white;
-    padding-top: 14px;
+    /* padding-top: 14px; */
 }
 
 .header__menu-item:hover {

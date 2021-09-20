@@ -1,0 +1,8 @@
+.form__bottom-text_type_link {
+    color: #2BE080;
+    text-decoration: none;
+}
+
+.form__bottom-text_type_link:hover{
+    opacity: 0.6;
+}

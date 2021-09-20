@@ -58,6 +58,7 @@
 @import url(./components/Main/Portfolio/__element/portfolio__element.css);
 
 @import url(./components/Footer/Footer.css);
+@import url(./components/Footer/__container/footer__container.css);
 @import url(./components/Footer/__text/footer__text.css);
 @import url(./components/Footer/__infromation/footer__information.css);
 @import url(./components/Footer/__copyright/footer__copyright.css);
@@ -70,16 +71,14 @@
 @import url(./components/PageNotFound/__subtitle/page-not-found__subtitle.css);
 @import url(./components/PageNotFound/__button/page-not-found__button.css);
 
-@import url(./blocks/auth/auth.css);
-@import url(./blocks/auth/__logo/auth__logo.css);
-@import url(./blocks/auth/__title/auth__title.css);
-@import url(./blocks/auth/__form/auth__form.css);
-@import url(./blocks/auth/__input-container/auth__input-container.css);
-@import url(./blocks/auth/__form-label/auth__form-label.css);
-@import url(./blocks/auth/__item/auth__item.css);
-@import url(./blocks/auth/__submit-button/auth__submit-button.css);
-@import url(./blocks/auth/__bottom-text/auth__bottom-text.css);
-@import url(./blocks/auth/__bottom-text/_type/auth__bottom-text_type_link.css);
+@import url(./components/Form/Form.css);
+@import url(./components/Form/__title/form__title.css);
+@import url(./components/Form/__input-container/form__input-container.css);
+@import url(./components/Form/__input-label/form__input-label.css);
+@import url(./components/Form/__item/form__item.css);
+@import url(./components/Form/__submit-button/form__submit-button.css);
+@import url(./components/Form/__bottom-text/form__bottom-text.css);
+@import url(./components/Form/__bottom-text/_type/form__bottom-text_type_link.css);
 
 @import url(./components/Profile/Profile.css);
 @import url(./components/Profile/__form/profile__form.css);
