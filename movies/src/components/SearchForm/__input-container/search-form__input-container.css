@@ -1,0 +1,8 @@
+.search-form__input-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1.5px solid rgba(170, 170, 170, 0.2);
+    box-sizing: border-box;
+    border-radius: 8px;
+}

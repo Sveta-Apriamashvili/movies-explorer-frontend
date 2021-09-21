@@ -1,0 +1,6 @@
+.search-form {
+    width: calc(100% - 140px);
+    margin: 70px auto;
+    border-bottom: 1px solid rgba(170, 170, 170, 0.2);
+    padding-bottom: 43px;
+}

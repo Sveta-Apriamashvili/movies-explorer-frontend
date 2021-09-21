@@ -1,0 +1,16 @@
+.search-form__submit-button {
+    border: none;
+    padding: 17px 20px;
+    background-color: #2BE080;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    border-radius: 5px;
+    width: 100px;
+}
+
+.search-form__submit-button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}

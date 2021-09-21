@@ -5,6 +5,7 @@
 @import url(./blocks/page/__container/page__container.css);
 
 @import url(./components/Header/Header.css);
+@import url(./components/Header/_type/header_type_logged-in.css);
 @import url(./components/Header/__logo/header__logo.css);
 @import url(./components/Header/__menu/header__menu.css);
 @import url(./components/Header/__menu-item/header__menu-item.css);
@@ -88,3 +89,17 @@
 @import url(./components/Profile/__item/profile__item.css);
 @import url(./components/Profile/__submit-button/profile__submit-button.css);
 @import url(./components/Profile/__logout-link/profile__logout-link.css);
+
+@import url(./components/Navigation/Navigation.css);
+@import url(./components/Navigation/__menu/navigation__menu.css);
+@import url(./components/Navigation/__movies/navigation__movies.css);
+@import url(./components/Navigation/__menu-item/navigation__menu-item.css);
+@import url(./components/Navigation/__menu-item/_type/navigation__menu-item_type_normal.css);
+@import url(./components/Navigation/__profile/navigation__profile.css);
+
+@import url(./components/SearchForm/SearchForm.css);
+@import url(./components/SearchForm/__form/search-form__form.css);
+@import url(./components/SearchForm/__input-container/search-form__input-container.css);
+@import url(./components/SearchForm/__item/search-form__item.css);
+@import url(./components/SearchForm/__submit-button/search-form__submit-button.css);
+@import url(./components/SearchForm/__checkbox/search-form__checkbox.css);

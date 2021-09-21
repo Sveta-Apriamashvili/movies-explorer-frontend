@@ -1,17 +1,21 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import logo from '../../images/logo-auth.svg'
+import account_icon from '../../images/account-icon.svg'
 
 function Navigation() {
     return (
         <div className="navigation">
-            <Link to="/"><img className="header__logo" src={logo} alt="лого" /></Link>
-            <div className="navigation__movies">
-                <Link className="navigation__menu-item" to="/movies">Фильмы</Link>
-                <Link className="navigation__menu-item" to="/saved-movies">Сохранённые фильмы</Link>
+            <div className="navigation__menu">
+                <ul className="navigation__movies">
+                    <li><Link className="navigation__menu-item" to="/movies">Фильмы</Link></li>
+                    <li><Link className="navigation__menu-item navigation__menu-item_type_normal" to="/saved-movies">Сохранённые фильмы</Link></li>
+                </ul>
+                <div className="navigation__profile">
+                    <Link className="navigation__menu-item" to="/profile">Аккаунт</Link>
+                    <div className="navigation__profile-icon">
+                        <img src={account_icon}></img>
+                    </div>
                 </div>
-                <div className="navigaition__acc">
-                <Link className="navigation__menu-item" to="/profile">Аккаунт</Link>
             </div>
         </div>
     )
