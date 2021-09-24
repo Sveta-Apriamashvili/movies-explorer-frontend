@@ -102,7 +102,11 @@
 @import url(./components/SearchForm/__input-container/search-form__input-container.css);
 @import url(./components/SearchForm/__item/search-form__item.css);
 @import url(./components/SearchForm/__submit-button/search-form__submit-button.css);
-@import url(./components/SearchForm/__checkbox/search-form__checkbox.css);
+
+@import url(./components/FilterSlider/FilterSlider.css);
+@import url(./components/FilterSlider/__checkbox/filter-slider__checkbox.css);
+@import url(./components/FilterSlider/__label/filter-slider__label.css);
+@import url(./components/FilterSlider/__slider/filter-slider__slider.css);
 
 @import url(./components/Movies/Movies.css);
 @import url(./components/Movies/__button/movies__button.css);

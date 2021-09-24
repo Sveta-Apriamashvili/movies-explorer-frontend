@@ -1,4 +1,5 @@
 import React from "react";
+import FilterSlider from "../FilterSlider/FilterSlider";
 
 function SearchForm() {
 
@@ -10,11 +11,7 @@ function SearchForm() {
                     </input>
                     <button className="search-form__submit-button" type="submit">Поиск</button>
                 </fieldset>
-                <label className="search-form__checkbox">
-                    <input className="search-form__checkbox-icon" type="checkbox"/>
-                    Короткометражки
-                    <span className="search-form__slider"/>
-                </label>
+                <FilterSlider/>
             </form>
         </section>
     )

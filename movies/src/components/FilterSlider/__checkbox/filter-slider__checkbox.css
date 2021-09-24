@@ -1,0 +1,15 @@
+.filter-slider__checkbox {
+    position: absolute;
+    width: 1px; 
+    height: 1px;
+    overflow: hidden; 
+    clip: rect(0 0 0 0);
+} 
+
+.filter-slider__checkbox:checked + .filter-slider__slider {
+    background-color: #2BE080;
+  }
+  
+  .filter-slider__checkbox:checked + .filter-slider__slider:before {
+    transform: translateX(16px);
+  }
