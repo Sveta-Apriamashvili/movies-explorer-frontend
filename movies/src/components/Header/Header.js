@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../images/logo-auth.svg'
 import Navigation from "../Navigation/Navigation";
 
-const loggedIn = false;
+const loggedIn = true;
 
 const headerClassName = (`header ${loggedIn ? 'header_type_logged-in' : ''}`);
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import account_icon from '../../images/account-icon.svg'
+// import account_icon from '../../images/account-icon.svg'
 
 function Navigation() {
     return (
@@ -13,7 +13,6 @@ function Navigation() {
                 <div className="navigation__profile">
                     <Link className="navigation__menu-item" to="/profile">Аккаунт</Link>
                     <div className="navigation__profile-icon">
-                        <img src={account_icon}></img>
                     </div>
                 </div>
             </div>
