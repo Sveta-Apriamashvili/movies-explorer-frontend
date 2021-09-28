@@ -4,4 +4,11 @@
     display: flex;
     justify-content: center;
     gap: 40px;
+    padding: 0;
+}
+
+@media screen and (max-width: 330px) {
+    .navtab__links {
+      gap: 24px;
+    }
 }

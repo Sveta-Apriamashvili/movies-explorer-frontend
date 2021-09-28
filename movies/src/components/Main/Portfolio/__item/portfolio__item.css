@@ -7,3 +7,9 @@
     line-height: 50px;
     position: relative;
 }
+
+@media screen and (max-width: 768px) {
+    .portfolio__item {
+        font-size: 28px;
+    }
+}

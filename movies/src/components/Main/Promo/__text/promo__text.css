@@ -1,7 +1,15 @@
 .promo__text {
-    margin: 0;
+    margin: auto;
+    max-width: 730px;
     font-size: 50px;
     line-height: 58px;
     font-weight: 400;
     text-align: center;
+}
+
+@media screen and (max-width: 330px) {
+    .promo__text {
+        font-size: 31px;
+        line-height: 39px;
+    }
 }

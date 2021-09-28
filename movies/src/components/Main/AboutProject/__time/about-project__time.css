@@ -6,3 +6,10 @@
     padding: 9px;
     background-color: #F2F2F2;
 }
+
+@media screen and (max-width: 330px) {
+    .about-project__time {
+        font-size: 11px;
+        line-height: 13px;
+    }
+}

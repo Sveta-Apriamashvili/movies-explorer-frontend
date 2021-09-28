@@ -6,3 +6,11 @@
     max-width: 460px;
     padding-top: 26px;
 }
+
+@media screen and (max-width: 330px) {
+    .techs__subtitle {
+        font-size: 11px;
+        line-height: 16px;
+        width: calc(100% - 28px);
+    }
+}

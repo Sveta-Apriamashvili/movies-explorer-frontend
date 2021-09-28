@@ -9,3 +9,10 @@
     width: calc(100% - 590px);
     margin: 0 auto;
 }
+
+@media screen and (max-width: 1023px) {
+    .techs__list {
+        width: calc(100% - 120px);
+        grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+    }
+}
