@@ -9,7 +9,5 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    background-color: #F9F9F9;
-    height: 46px;
-    border-radius: 8px;
+    border-bottom: 1px solid #E8E8E8;
 }

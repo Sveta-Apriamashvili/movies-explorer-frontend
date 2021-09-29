@@ -5,7 +5,7 @@ import logo_auth from '../../images/logo-auth.svg'
 function Form(props) {
     return (
         <div className="form">
-            <img src={logo_auth} className="form__logo" />
+            <img src={logo_auth} className="form__logo" alt="лого" />
             <h1 className="form__title">{props.title}</h1>
             <form className="form__container">
                 {props.inputs.map((item) => (

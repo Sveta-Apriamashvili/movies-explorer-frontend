@@ -12,7 +12,7 @@ function Login() {
         },
         {
             key: 2,
-            label: 'Password',
+            label: 'Пароль',
             id: 'password',
             name: 'password',
             type: 'password'

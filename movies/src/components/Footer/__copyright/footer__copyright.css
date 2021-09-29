@@ -1,3 +1,10 @@
 .footer__copyright {
     margin: 0;
 }
+
+@media screen and (max-width: 326px) {
+    .footer__copyright {
+margin-top: 30px;
+color: #A0A0A0;
+    }
+  }

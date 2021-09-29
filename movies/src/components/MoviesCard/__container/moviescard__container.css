@@ -1,6 +1,4 @@
 .moviescard__container {
-    width: calc(100% - 28px);
-    margin: auto;
     display: flex;
     justify-content: space-between;
 }
