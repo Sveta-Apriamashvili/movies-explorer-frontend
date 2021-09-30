@@ -8,3 +8,10 @@
     border: none;
     cursor: pointer;
 }
+
+@media screen and (max-width: 335px) {
+    .page-not-found__button {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

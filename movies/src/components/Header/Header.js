@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import logo from '../../images/logo-auth.svg'
 import Navigation from "../Navigation/Navigation";
+import Burger from "../Burger/Burger";
 
-const loggedIn = false;
+const loggedIn = true;
 
 const headerClassName = (`header ${loggedIn ? 'header_type_logged-in' : ''}`);
 
@@ -24,6 +25,10 @@ function Header() {
 
             {loggedIn &&
                 (<Navigation />)}
+
+            {loggedIn && (
+                <Burger/>
+            )}
         </header>
     )
 }

@@ -4,3 +4,9 @@
     font-weight: 500;
     margin: 40px 0;
 }
+
+@media screen and (max-width: 440px) {
+    .form__title {
+       align-self: center;
+    }
+}

@@ -5,3 +5,10 @@
     font-weight: 400;
     text-align: center;
 }
+
+@media screen and (max-width: 335px) {
+    .page-not-found__title {
+        font-size: 80px;
+        line-height: 97px;
+    }
+}

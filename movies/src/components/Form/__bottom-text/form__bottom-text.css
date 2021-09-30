@@ -10,3 +10,10 @@
     grid-gap: 6px;
     gap: 6px;
 }
+
+@media screen and (max-width: 440px) {
+    .form__bottom-text {
+        font-size: 12px;
+        line-height: 14px;
+    }
+}

@@ -4,7 +4,14 @@
     align-items: flex-start;
     justify-content: center;
     color: black;
-    width: max-content;
+    /* width: max-content; */
+    max-width: 396px;
     margin: auto;
     padding-top: 70px;
+}
+
+@media screen and (max-width: 440px) {
+    .form {
+        width: calc(100% - 60px);
+    }
 }

@@ -4,3 +4,10 @@
     font-size: 16px;
     text-align: center;
 }
+
+@media screen and (max-width: 335px) {
+    .page-not-found__subtitle {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-// import account_icon from '../../images/account-icon.svg'
 
 function Navigation() {
     return (
