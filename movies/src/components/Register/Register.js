@@ -8,7 +8,9 @@ function Register() {
         label: 'Имя',
         id: 'name',
         name: 'name',
-        type: 'text'
+        type: 'text',
+        minLength: 2,
+        maxLength:30
     },
     {
         key: 2,
@@ -23,7 +25,8 @@ function Register() {
         label: 'Password',
         id: 'password',
         name: 'password',
-        type: 'password'
+        type: 'password',
+        minLength: 8
     }]
 
     return (

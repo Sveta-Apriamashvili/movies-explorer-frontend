@@ -1,0 +1,5 @@
+.side-bar-menu__profile {
+    display: flex;
+    gap: 23px;
+    align-items: center;
+}

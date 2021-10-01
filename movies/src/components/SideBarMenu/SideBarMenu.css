@@ -1,0 +1,13 @@
+.side-bar-menu {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+    background: rgba(0, 0, 0, 0.3);
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}

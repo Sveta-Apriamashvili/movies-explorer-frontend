@@ -11,7 +11,9 @@ function Form(props) {
                 {props.inputs.map((item) => (
                     <div className="form__input-container" key={item.key}>
                         <label className="form__input-label">{item.label}</label>
-                        <input className="form__item" id={item.id} name={item.name} type={item.type} />
+                        <input className="form__item" id={item.id} name={item.name} type={item.type} minLength={item.minLength}
+                            maxLength={item.maxLength} required />
+                        {/* <span className="form__error" id={item.errorId}></span> */}
                     </div>))}
                 <button className="form__submit-button" type="submit">{props.button}</button>
             </form>

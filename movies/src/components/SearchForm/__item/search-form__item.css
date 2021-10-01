@@ -8,3 +8,7 @@
     font-size: 18px;
     line-height: 20px;
   }
+
+  .search-form__item:focus {
+      outline: none;
+  }

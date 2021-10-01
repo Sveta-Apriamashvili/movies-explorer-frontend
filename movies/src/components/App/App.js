@@ -1,9 +1,8 @@
 import React from 'react';
 import Footer from '../Footer/Footer';
-import { Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
-// import logo from '../../images/logo.svg';
 import './App.css';
 import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
@@ -11,25 +10,38 @@ import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import SideBarMenu from '../SideBarMenu/SideBarMenu';
 
 function App() {
   const headerExclusionPaths = [
     "/signin",
     "/signup",
-    
+
   ];
 
   const footerExclusionPaths = [
     "/signin",
     "/signup",
     "/profile",
-    
+
   ]
+
+  const [isSideBarMenuOpened, setIsSideBarMenuOpened] = React.useState(false);
+
+  function handleBurgerMenuClick() {
+    setIsSideBarMenuOpened(true);
+  }
+
+  function closeSideMenu() {
+    setIsSideBarMenuOpened(false);
+  }
 
   return (
     <div className="page__container">
       {useRouteMatch(headerExclusionPaths) ? null :
-        (<Header />)
+        (<Header
+          onBurgerMenu={handleBurgerMenuClick}
+        />)
       }
       <Switch>
         <Route exact path="/">
@@ -57,6 +69,7 @@ function App() {
       {useRouteMatch(footerExclusionPaths) ? null :
         (<Footer />)
       }
+      <SideBarMenu isOpen={isSideBarMenuOpened} onClose={closeSideMenu} />
     </div>
   );
 }

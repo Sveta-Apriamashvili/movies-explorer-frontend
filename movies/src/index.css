@@ -124,3 +124,14 @@
 @import url(./components/MoviesCard/__save-button/_type/moviescard__save-button_type_delete.css);
 
 @import url(./components/Burger/Burger.css);
+
+@import url(./components/SideBarMenu/SideBarMenu.css);
+@import url(./components/SideBarMenu/_opened/side-bar-menu_opened.css);
+@import url(./components/SideBarMenu/__container/side-bar-menu__container.css);
+@import url(./components/SideBarMenu/__close-button/side-bar-menu__close-button.css);
+@import url(./components/SideBarMenu/__navigation/side-bar-menu__navigation.css);
+@import url(./components/SideBarMenu/__list/side-bar-menu__list.css);
+@import url(./components/SideBarMenu/__list-item/side-bar-menu__list-item.css);
+@import url(./components/SideBarMenu/__list-item/_active/side-bar-menu__list-item_active.css);
+@import url(./components/SideBarMenu/__profile/side-bar-menu__profile.css);
+@import url(./components/SideBarMenu/__profile-icon/side-bar-menu__profile-icon.css);

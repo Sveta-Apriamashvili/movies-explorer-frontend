@@ -1,0 +1,12 @@
+.side-bar-menu__list-item {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 4px;
+}
+
+.side-bar-menu__list-item:last-of-type {
+    padding-bottom: 0;
+}

@@ -15,7 +15,8 @@ function Login() {
             label: 'Пароль',
             id: 'password',
             name: 'password',
-            type: 'password'
+            type: 'password',
+            minLength: 8
         }]
 
     return (

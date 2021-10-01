@@ -9,7 +9,7 @@ const loggedIn = true;
 const headerClassName = (`header ${loggedIn ? 'header_type_logged-in' : ''}`);
 
 
-function Header() {
+function Header(props) {
     return (
         <header className={headerClassName}>
             <div className="header__logo">
@@ -27,7 +27,7 @@ function Header() {
                 (<Navigation />)}
 
             {loggedIn && (
-                <Burger/>
+                <Burger onBurgerMenu={props.onBurgerMenu} />
             )}
         </header>
     )

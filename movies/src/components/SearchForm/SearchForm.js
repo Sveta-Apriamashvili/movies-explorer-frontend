@@ -11,7 +11,7 @@ function SearchForm() {
                     </input>
                     <button className="search-form__submit-button" type="submit">Поиск</button>
                 </fieldset>
-                <FilterSlider/>
+                <FilterSlider />
             </form>
         </section>
     )
