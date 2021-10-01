@@ -4,7 +4,7 @@ import logo from '../../images/logo-auth.svg'
 import Navigation from "../Navigation/Navigation";
 import Burger from "../Burger/Burger";
 
-const loggedIn = true;
+const loggedIn = false;
 
 const headerClassName = (`header ${loggedIn ? 'header_type_logged-in' : ''}`);
 
