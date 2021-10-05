@@ -1,0 +1,19 @@
+.about-project__timeline {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: calc(100% - 140px);
+    margin: auto;
+}
+
+@media screen and (max-width: 768px) {
+    .about-project__timeline {
+        width: calc(100% - 100px);
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .about-project__timeline {
+        width: calc(100% - 36px);
+    }
+}

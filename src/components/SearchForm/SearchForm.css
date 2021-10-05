@@ -1,0 +1,25 @@
+.search-form {
+    border-bottom: 1px solid rgba(170, 170, 170, 0.2);
+    padding-bottom: 43px;
+    width: calc(100% - 140px);
+    margin: auto;
+}
+
+@media screen and (max-width: 951px) {
+    .search-form {
+      width: calc(100% - 100px);
+    }
+  }
+  
+  @media screen and (max-width: 851px) {
+    .search-form {
+      width: calc(100% - 60px);
+      padding-bottom: 53px;
+    }
+  }
+  
+  @media screen and (max-width: 400px) {
+    .search-form {
+      width: calc(100% - 20px);
+    }
+  }

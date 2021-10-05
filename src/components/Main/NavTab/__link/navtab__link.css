@@ -1,0 +1,12 @@
+.navtab__link {
+    color: black;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.navtab__link:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+

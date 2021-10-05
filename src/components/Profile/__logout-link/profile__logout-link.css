@@ -1,0 +1,12 @@
+.profile__logout-link {
+    color: #EE3465;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 16px;
+    text-decoration: none;
+    margin-top: 16px;
+}
+
+.profile__logout-link:hover {
+    opacity: 0.6;
+}

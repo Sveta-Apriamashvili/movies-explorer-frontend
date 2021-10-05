@@ -1,0 +1,22 @@
+.side-bar-menu__close-button {
+    background-image: url(../../../images/close-button.svg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    border: 0;
+    padding: 0;
+    right: 22px;
+    top: 22px;
+}
+
+.side-bar-menu__close-button:focus {
+    outline: 0px;
+}
+
+.side-bar-menu__close-button:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}

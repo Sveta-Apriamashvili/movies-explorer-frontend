@@ -1,0 +1,9 @@
+.portfolio__link {
+    text-decoration: none;
+    color: black;
+}
+
+.portfolio__link:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}

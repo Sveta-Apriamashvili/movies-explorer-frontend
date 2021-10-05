@@ -1,0 +1,38 @@
+.burger {
+    display: none;
+    position: relative;
+    width: 28px;
+    height: 24px;
+    top: 26px;
+    right: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: color .3s ease;
+}
+
+.burger::before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 0;
+    width: 28px;
+    height: 3px;
+    background-color: rgba(0, 0, 0, 1);
+    box-shadow: 0 10px 0 0 rgba(0, 0, 0, 1), 0 20px 0 0 rgba(0, 0, 0, 1);
+}
+
+
+@media screen and (max-width: 768px) {
+    .burger {
+        display: block;
+        width: 23px;
+        height: 23px;
+    }
+
+    .burger::before {
+        width: 22px;
+        box-shadow: 0 9px 0 0 rgba(0, 0, 0, 1), 0 18px 0 0 rgba(0, 0, 0, 1);
+    }
+}

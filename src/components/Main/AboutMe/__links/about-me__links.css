@@ -1,0 +1,6 @@
+.about-me__links {
+    display: flex;
+    gap: 20px;
+    position: absolute;
+    bottom: 0;
+}

@@ -1,0 +1,19 @@
+.about-me__text {
+    font-size: 14px;
+    line-height: 22px;
+    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .about-me__text {
+        font-size: 12px;
+        line-height: 18px;
+        max-width: 364px;
+    }
+}
+
+@media screen and (max-width: 554px) {
+    .about-me__text {
+ padding-bottom: 50px;
+    }
+}

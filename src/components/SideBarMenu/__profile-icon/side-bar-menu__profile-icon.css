@@ -1,0 +1,11 @@
+.side-bar-menu__profile-icon {
+    background-image: url(../../../images/account-icon.svg);
+    border: none;
+    background-color: #F9F9F9;
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    background-position: 50%;
+    border-radius: 6px;
+    padding: 0;
+}

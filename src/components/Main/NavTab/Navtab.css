@@ -1,0 +1,12 @@
+.navtab {
+    background-color: #F5F5F5;
+    padding: 24px;
+}
+
+@media screen and (max-width: 330px) {
+    .navtab {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+}

@@ -1,0 +1,9 @@
+.techs__item {
+    font-size: 14px;
+    line-height: 17px;
+    padding-top: 21px;
+    padding-bottom: 22px;
+    text-align: center;
+    background-color: #E8E8E8;
+    border-radius: 10px;
+}

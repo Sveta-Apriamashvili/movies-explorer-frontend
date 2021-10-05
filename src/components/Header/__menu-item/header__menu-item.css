@@ -1,0 +1,13 @@
+.header__menu-item {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-decoration: none;
+    color: white;
+    /* padding-top: 14px; */
+}
+
+.header__menu-item:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}

@@ -1,0 +1,15 @@
+.moviescard__save-button {
+    background-image: url(../../../images/icon-to-save.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    width: 40px;
+    border: 0;
+    padding: 0;
+    margin-right: 14px;
+}
+
+.moviescard__save-button:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}

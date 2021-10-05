@@ -1,0 +1,15 @@
+.portfolio__item {
+    padding-bottom: 19px;
+    padding-top: 20px;
+    border-bottom: 1px solid #E5E5E5;
+    margin: auto;
+    font-size: 30px;
+    line-height: 50px;
+    position: relative;
+}
+
+@media screen and (max-width: 768px) {
+    .portfolio__item {
+        font-size: 28px;
+    }
+}

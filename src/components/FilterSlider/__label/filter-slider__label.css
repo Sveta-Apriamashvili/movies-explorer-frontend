@@ -1,0 +1,9 @@
+ .filter-slider__label {
+    display: inline-block;
+    position: relative;
+    color: black;
+    margin-top: 26px;
+    font-size: 13px;
+    line-height: 18px;
+    padding-left: 50px;
+} 
