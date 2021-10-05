@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import Form from "../Form/Form";
 
-function Register() {
+function Register(props) {
 
     const inputs = [{
         key: 1,
@@ -29,6 +29,23 @@ function Register() {
         minLength: 8
     }]
 
+    const [userRegistration, setUserRegistration] = useState({
+        name: "",
+        email: "",
+        password: ""
+      });
+    
+      function handleChange(e) {
+        const { name, value } = e.target
+        setUserRegistration({ ...userRegistration, [name]: value })
+      }
+    
+      function handleSubmit(e) {
+        e.preventDefault()
+        const {name, email, password} = userRegistration
+        props.onRegister(name, email, password)
+      }
+
     return (
         <Form
             title="Добро пожаловать!"
@@ -37,6 +54,8 @@ function Register() {
             text = "Уже зарегистрированы?"
             link_address = "/signin"
             link_name = "Войти"
+            onSubmit={handleSubmit}
+            onChange={handleChange}
         />
     )
 }
