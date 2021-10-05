@@ -11,4 +11,5 @@
 
   .search-form__item:focus {
       outline: none;
+      border: 1px solid #2BE080;
   }
