@@ -82,6 +82,7 @@
 @import url(./components/Form/__submit-button/form__submit-button.css);
 @import url(./components/Form/__bottom-text/form__bottom-text.css);
 @import url(./components/Form/__bottom-text/_type/form__bottom-text_type_link.css);
+@import url(./components/Form/__error/form__error.css);
 
 @import url(./components/Profile/Profile.css);
 @import url(./components/Profile/__form/profile__form.css);
@@ -91,6 +92,7 @@
 @import url(./components/Profile/__item/profile__item.css);
 @import url(./components/Profile/__submit-button/profile__submit-button.css);
 @import url(./components/Profile/__logout-link/profile__logout-link.css);
+@import url(./components/Profile/__error/profile__error.css);
 
 @import url(./components/Navigation/Navigation.css);
 @import url(./components/Navigation/__menu/navigation__menu.css);

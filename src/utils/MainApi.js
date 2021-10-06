@@ -1,6 +1,6 @@
 export const BASE_URL = 'https://api.study.movies.nomoredomains.club';
 
-export const register = (name, email, password) => {
+export const register = (data) => {
   return fetch(`${BASE_URL}/signup`, {
       method: 'POST',
       headers: {
@@ -8,15 +8,15 @@ export const register = (name, email, password) => {
       },
       credentials: 'include',
       body: JSON.stringify({
-        'name': name,
-        'email': email,
-        'password': password
+        'name': data.name,
+        'email': data.email,
+        'password': data.password
       })
     })
     .then(_handleResponse)
 };
 
-export const login = (email, password) => {
+export const login = (data) => {
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {
@@ -24,8 +24,8 @@ export const login = (email, password) => {
     },
     credentials: 'include',
     body: JSON.stringify({
-      'email': email,
-      'password': password
+      'email': data.email,
+      'password': data.password
     })
   })
 };
@@ -60,10 +60,7 @@ export const getUserInfo = () => {
     .then(_handleResponse);
 };
 
-export const editUserInfo = ({
-  name,
-  email
-}) => {
+export const editUserInfo = (data) => {
   const url = `${BASE_URL}/users/me`
   return fetch(url, {
       method: 'PATCH',
@@ -72,8 +69,8 @@ export const editUserInfo = ({
       },
       credentials: 'include',
       body: JSON.stringify({
-        name: name,
-        email: email
+        'name': data.name,
+        'email': data.email
       })
     })
     .then(_handleResponse);

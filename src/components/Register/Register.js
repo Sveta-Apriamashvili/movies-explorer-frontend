@@ -1,5 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 import Form from "../Form/Form";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
 function Register(props) {
 
@@ -10,7 +11,8 @@ function Register(props) {
         name: 'name',
         type: 'text',
         minLength: 2,
-        maxLength:30
+        maxLength: 30,
+        pattern: '[A-Za-zА-ЯЁа-яё -]+'
     },
     {
         key: 2,
@@ -29,33 +31,32 @@ function Register(props) {
         minLength: 8
     }]
 
-    const [userRegistration, setUserRegistration] = useState({
-        name: "",
-        email: "",
-        password: ""
-      });
-    
-      function handleChange(e) {
-        const { name, value } = e.target
-        setUserRegistration({ ...userRegistration, [name]: value })
-      }
-    
-      function handleSubmit(e) {
+    const {
+        values,
+        errors,
+        isValid,
+        handleChange,
+    } = useFormWithValidation({});
+
+
+    function handleSubmit(e) {
         e.preventDefault()
-        const {name, email, password} = userRegistration
-        props.onRegister(name, email, password)
-      }
+        props.onRegister(values)
+    }
 
     return (
         <Form
             title="Добро пожаловать!"
             inputs={inputs}
-            button = "Зарегистрироваться"
-            text = "Уже зарегистрированы?"
-            link_address = "/signin"
-            link_name = "Войти"
+            button="Зарегистрироваться"
+            text="Уже зарегистрированы?"
+            link_address="/signin"
+            link_name="Войти"
             onSubmit={handleSubmit}
             onChange={handleChange}
+            isValid={isValid}
+            errors={errors}
+            values={values}
         />
     )
 }

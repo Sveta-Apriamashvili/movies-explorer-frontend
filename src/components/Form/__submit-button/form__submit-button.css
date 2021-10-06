@@ -11,6 +11,15 @@
     margin-top: 179px;
 }
 
+.form__submit-button:hover {
+    cursor: pointer;
+}
+
+.form__submit-button:disabled {
+    cursor: default;
+    background-color: #F2F2F2;
+}
+
 @media screen and (max-width: 440px) {
     .form__submit-button {
         font-size: 12px;

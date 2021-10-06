@@ -1,49 +1,47 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
 
 function Profile(props) {
     const currentUser = React.useContext(CurrentUserContext);
-    const [name, setName] = React.useState('');
-    const [email, setEmail] = React.useState('');
+    // const [isEdited, setIsEdited] = React.useState(false);
 
-    function handleChangeName(e) {
-        setName(e.target.value)
-    }
-
-    function handleChangeEmail(e) {
-        setEmail(e.target.value)
-    }
+    const {
+        values,
+        errors,
+        isValid,
+        handleChange,
+        resetForm,
+      } = useFormWithValidation({});
 
     function handleSubmit(e) {
         e.preventDefault();
-
-        props.onUpdateUser({
-            name,
-            email,
-        });
+        props.onUpdateUser(values);
     }
 
+
     React.useEffect(() => {
-        setName(currentUser ? currentUser.name : '');
-        setEmail(currentUser ? currentUser.email : '');
-    }, [currentUser]);
+        resetForm({ name: currentUser.name, email: currentUser.email });
+      }, [currentUser]);
 
     return (
 
         <div className="profile">
-            <h1 className="profile__title">Привет, {props.userName}</h1>
+            <h1 className="profile__title">Привет, {currentUser.name}!</h1>
             <form className="profile__form">
                 <div className="profile__input-items">
                     <label className="profile__form-label">Имя</label>
-                    <input className="profile__item" id="name" name="name" type="text" onChange={handleChangeName} value={name || ''} />
+                    <input className="profile__item" id="name" name="name" type="text" minLength = "2" maxLength = "30" pattern = "[A-Za-zА-ЯЁа-яё -]+" onChange={handleChange} value={values["name"]  } />
+                    <span className="profile__error">{errors["name"]}</span>
                 </div>
                 <div className="profile__input-items">
                     <label className="profile__form-label">E-mail</label>
-                    <input className="profile__item" id="email" name="email" type="email" onChange={handleChangeEmail} value={email || ''} />
+                    <input className="profile__item" id="email" name="email" type="email" onChange={handleChange} value={values["email"]} />
+                    <span className="profile__error">{errors["email"]}</span>
                 </div>
-                <button className="profile__submit-button" type="submit" onClick={handleSubmit}>Редактировать</button>
+                <button className="profile__submit-button" type="submit" onClick={handleSubmit} disabled={!isValid}>Редактировать</button>
             </form>
             <Link to="/" className="profile__logout-link" onClick={props.onSignOut}>Выйти из аккаунта</Link>
         </div>

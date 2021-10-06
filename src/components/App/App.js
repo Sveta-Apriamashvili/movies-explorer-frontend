@@ -31,6 +31,7 @@ function App() {
   const [isSideBarMenuOpened, setIsSideBarMenuOpened] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
+
   const history = useHistory();
 
 
@@ -42,16 +43,16 @@ function App() {
     setIsSideBarMenuOpened(false);
   }
 
-  function onRegister(name, email, password) {
-    mainApi.register(name, email, password)
+  function onRegister(data) {
+    mainApi.register(data)
       .then(() => {
-        onLogin(email, password);
+        onLogin(data);
       })
       .catch(console.log('error'))
   }
 
-  function onLogin(email, password) {
-    mainApi.login(email, password)
+  function onLogin(data) {
+    mainApi.login(data)
       .then(() => {
         onTokenCheck()
       })
@@ -64,20 +65,25 @@ function App() {
     mainApi.checkToken()
       .then(res => {
         setIsLoggedIn(res != null)
-        // setUserInfo(res.email)
+        setCurrentUser(res)
         history.push('/movies')
       })
       .catch(() => console.log('error'))
 
   }, [history])
 
-  function handleUpdateUser(name, email) {
-    mainApi.editUserInfo(name, email)
+  function handleUpdateUser(data) {
+    mainApi.editUserInfo(data)
       .then(res => {
         setCurrentUser(res)
       })
       .catch(() => console.log('error'))
   }
+
+  function handleSignOut() {
+    mainApi.signOut()
+    setIsLoggedIn(false)
+}
 
   React.useEffect(() => {
     onTokenCheck()
@@ -90,6 +96,7 @@ function App() {
         {useRouteMatch(headerExclusionPaths) ? null :
           (<Header
             onBurgerMenu={handleBurgerMenuClick}
+            isLoggedIn={isLoggedIn}
           />)
         }
         <Switch>
@@ -107,6 +114,7 @@ function App() {
           <Route path="/profile">
             <Profile
               onUpdateUser={handleUpdateUser}
+              onSignOut={handleSignOut}
             />
           </Route>
           <Route path="/signin">
