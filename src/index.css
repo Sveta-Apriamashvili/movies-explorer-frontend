@@ -107,6 +107,7 @@
 @import url(./components/SearchForm/__input-container/search-form__input-container.css);
 @import url(./components/SearchForm/__item/search-form__item.css);
 @import url(./components/SearchForm/__submit-button/search-form__submit-button.css);
+@import url(./components/SearchForm/__error/search-form__error.css);
 
 @import url(./components/FilterSlider/FilterSlider.css);
 @import url(./components/FilterSlider/__checkbox/filter-slider__checkbox.css);

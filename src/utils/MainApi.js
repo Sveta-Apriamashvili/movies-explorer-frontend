@@ -76,6 +76,62 @@ export const editUserInfo = (data) => {
     .then(_handleResponse);
 };
 
+export const changeMovieStatus = (id, isSaved) => {
+  if (isSaved) {
+    return deleteMovie(id)
+  } else {
+    return saveMovie(id)
+  }
+}
+
+export const saveMovie = (data) => {
+  const url = `${BASE_URL}/movies`
+  return fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "country": data.country,
+        "director": data.director,
+        "duration": data.duration,
+        "year": data.year,
+        "description": data.description,
+        "image": `https://api.nomoreparties.co${data.image.url}`,
+        "trailer": data.trailerLink,
+        "thumbnail": `https://api.nomoreparties.co${data.image.url}`,
+        "movieId": `${data.id}`,
+        "nameRU": data.nameRU,
+        "nameEN": data.nameEN,
+    }),
+      credentials: 'include',
+    })
+    .then(_handleResponse);
+}
+
+export const deleteMovie = (id) => {
+  const url = `${BASE_URL}/movies/${id}`
+  return fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+    .then(_handleResponse);
+}
+
+export const getSavedMovies = () => {
+  return fetch(`${BASE_URL}/movies`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    })
+    .then(_handleResponse)
+};
+
 function _handleResponse(res) {
   if (!res.ok) {
     return Promise.reject(`Ошибка: ${res.status}`);
