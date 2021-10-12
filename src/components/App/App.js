@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import Footer from '../Footer/Footer';
 import { Route, Switch, useRouteMatch, useHistory } from 'react-router-dom';
 import Header from '../Header/Header';
@@ -30,8 +30,10 @@ function App() {
   const [isSideBarMenuOpened, setIsSideBarMenuOpened] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
-  const [cards, setCards] = React.useState([]);
+  const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
+  const [localData, setLocalData] = React.useState([]);
+  // const [loader, setLoader] = React.useState(false);
 
   const history = useHistory();
 
@@ -42,6 +44,18 @@ function App() {
   function closeSideMenu() {
     setIsSideBarMenuOpened(false);
   }
+
+  // Token check, auth, user update, signout
+
+  const onAuthStatusCheck = useCallback(() => {
+    mainApi.checkToken()
+      .then(() => setIsLoggedIn(true))
+      .catch(() => console.log('error'))
+  }, []);
+
+  React.useEffect(() => {
+    onAuthStatusCheck()
+  }, [onAuthStatusCheck]);
 
   function onRegister(data) {
     mainApi.register(data)
@@ -54,23 +68,11 @@ function App() {
   function onLogin(data) {
     mainApi.login(data)
       .then(() => {
-        onTokenCheck()
-      })
-      .catch(() => console.log('error')
-      )
-  }
-
-  const onTokenCheck = React.useCallback(() => {
-
-    mainApi.checkToken()
-      .then(res => {
-        setIsLoggedIn(res != null)
-        setCurrentUser(res)
-        history.push('/movies')
+        setIsLoggedIn(true);
+        history.push('/movies');
       })
       .catch(() => console.log('error'))
-
-  }, [history])
+  }
 
   function handleUpdateUser(data) {
     mainApi.editUserInfo(data)
@@ -82,99 +84,123 @@ function App() {
 
   function handleSignOut() {
     mainApi.signOut()
-    setIsLoggedIn(false)
-  }
-
-  function getSavedMovies() {
-    mainApi.getSavedMovies()
-        .then((savedMovies) => {
-            setSavedMovies(savedMovies);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-}
-
-function saveMovie(movie) {
-  mainApi.saveMovie(movie)
-      .then((res) => {
-          const newSavedMovie = res.newMovie;
-          setSavedMovies([...savedMovies, newSavedMovie]);
-      })
-      .catch((err) => console.log(err));
-}
-
-function deleteMovie(movie) {
-  const movieId = savedMovies.find(
-      (item) => item.movieId === movie.movieId
-  )._id;
-  mainApi.deleteMovie(movieId)
-      .then((res) => {
-          getSavedMovies();
-      })
-      .catch((err) => console.log(err));
-}
-
-function handleCardSaveButton(movie, isSaved) {
-  isSaved ? deleteMovie(movie) : saveMovie(movie);
-}
-
-function checkMovieStatus(movie) {
-  return savedMovies.some(
-      savedMovie => savedMovie.movieId === movie.id 
-  );         
-}
-
-  // const searchFilter = (searchQueries, cards) => {
-  //   const { search = '', shortfilm = false } = searchQueries;
-
-  //   const filterKeyword = (movie) => {
-  //     return JSON.stringify(movie).toLowerCase().includes(search.toLowerCase())
-  //   }
-
-  //   const filterShortfilm = (movie) => {
-  //     return movie.duration <= 40;
-  //   }
-
-  //   if (shortfilm) {
-  //     return cards.filter(filterShortfilm).filter(filterKeyword);
-  //   } else {
-  //     return cards.filter(filterKeyword);
-  //   }
-  // }
-
-  // const handleSearchFormSubmit = (searchQueries = {}) => {
-  //   const localMoviesData = JSON.parse(localStorage.getItem('movies'));
-  //   if (localMoviesData) {
-  //     const filteredMovies = searchFilter(searchQueries, localMoviesData);
-
-  //     // if (filteredMovies.length === 0) {
-  //     //   setIsNoMoviesFound(true);
-  //     // } else {
-  //     //   setIsNoMoviesFound(false);
-  //     // }
-
-  //     // localStorage.setItem('filtered-previously-movies', JSON.stringify(markAsSaved(filteredMovies)));
-
-  //     setCards(filteredMovies);
-  //   }
-  // };
-
-
-  React.useEffect(() => {
-    if (!isLoggedIn) { return }
-
-    Promise.all([mainApi.getUserInfo(), moviesApi.getMovies()])
-      .then(([user, cards]) => {
-        setCurrentUser(user)
-        setCards(cards)
+      .then(() => {
+        setIsLoggedIn(false)
+        localStorage.clear();
+        history.push("/");
       })
       .catch(() => console.log('error'))
-  }, [isLoggedIn]);
+  }
+
+  // Search movie
+
+  function handleSearchFormSubmit(search) {
+    setTimeout(() => {
+      const filteredMovies = localData.filter((item) => {
+        const filtered = item.nameRU
+          .toLowerCase()
+          .includes(search.movie.toLowerCase());
+        return filtered;
+      });
+
+      localStorage.setItem('filtered', JSON.stringify(filteredMovies));
+
+      setMovies(filteredMovies);
+    }, 1000);
+  }
+
+  //Save movie, delete movie
+
+  const toggleMovieStatus = (movie) => {
+    const movieId = `${movie.id}`
+    const isSaved = savedMovies.some((i) => i.movieId === movieId);
+
+    if (isSaved) {
+      handleDeleteMovie(movieId)
+    } else {
+      handleSaveMovie(movie)
+    }
+  }
+
+  const handleSaveMovie = (movie) => {
+    mainApi.saveMovie(movie)
+      .then((res) => {
+        const tmpSavedMovies = savedMovies.concat([res])
+        console.log(res._id)
+        console.log(savedMovies.map((m) => m._id))
+        localStorage.setItem('savedMovies', JSON.stringify(tmpSavedMovies));
+        setSavedMovies(tmpSavedMovies);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const handleDeleteMovie = (movieId) => {
+    const movieToDelete = savedMovies.find((movie) => movie.movieId === movieId)
+    if (movieToDelete === undefined) return;
+
+    mainApi
+      .deleteMovie(movieToDelete._id)
+      .then(() => {
+        const filteredMovies = savedMovies.filter((item) => item._id !== movieToDelete._id)
+        localStorage.setItem('savedMovies', JSON.stringify(filteredMovies));
+        setSavedMovies(filteredMovies);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getMovies = () => {
+    mainApi
+      .getMovies()
+      .then((res) => {
+        const ownedSavedMovies = res.filter((x) => x.owner === currentUser._id)
+        console.log(`owned movies: ${ownedSavedMovies}`);
+        localStorage.setItem('savedMovies', JSON.stringify(ownedSavedMovies));
+        const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+        setSavedMovies(savedMovies);
+      })
+      .catch((err) => console.log(err));
+  };
 
   React.useEffect(() => {
-    onTokenCheck()
-  }, [onTokenCheck]);
+    if (isLoggedIn) {
+      const localUserData = localStorage.getItem('currentUser');
+      const localMoviesData = localStorage.getItem('movies');
+      const localSavedMoviesData = localStorage.getItem('savedMovies');
+
+      if (!localUserData) {
+        mainApi
+          .getUserInfo()
+          .then((res) => {
+            localStorage.setItem('currentUser', JSON.stringify(res));
+            setCurrentUser(res);
+          })
+          .catch((err) => console.log('error'))
+      } else {
+        setCurrentUser(JSON.parse(localUserData));
+      };
+      if (!localMoviesData) {
+        moviesApi
+          .getMovies()
+          .then((res) => {
+            localStorage.setItem('movies', JSON.stringify(res));
+            const allMovies = JSON.parse(localStorage.getItem('movies'));
+            setLocalData(allMovies);
+          })
+          .catch((err) => console.log('error'))
+      } else {
+        setLocalData(JSON.parse(localMoviesData));
+      };
+      if (!localSavedMoviesData) {
+        getMovies()
+      } else {
+        setSavedMovies(JSON.parse(localSavedMoviesData));
+      };
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="page__container">
@@ -194,15 +220,19 @@ function checkMovieStatus(movie) {
           </Route>
           <Route path="/movies">
             <Movies
-              cards={cards}
-              // onSubmit={handleSearchFormSubmit}
-              onSaveButton={handleCardSaveButton}
-              checkMovieStatus={checkMovieStatus}
-              
+              searchResults={movies}
+              savedMovies={savedMovies}
+              onSubmit={handleSearchFormSubmit}
+              handleSaveMovie={toggleMovieStatus}
+            // loader={loader}
             />
           </Route>
           <Route path="/saved-movies">
-            <SavedMovies />
+            <SavedMovies
+              searchResults={savedMovies}
+              savedMovies={savedMovies}
+              handleDeleteMovie={handleDeleteMovie}
+            />
           </Route>
           <Route path="/profile">
             <Profile
@@ -213,7 +243,6 @@ function checkMovieStatus(movie) {
           <Route path="/signin">
             <Login
               onLogin={onLogin}
-              onTokenCheck={onTokenCheck}
             />
           </Route>
           <Route path="/signup">
