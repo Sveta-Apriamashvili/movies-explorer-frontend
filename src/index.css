@@ -6,6 +6,7 @@
 
 @import url(./components/Header/Header.css);
 @import url(./components/Header/_type/header_type_logged-in.css);
+@import url(./components/Header/_type/header_type_logged-in_main.css);
 @import url(./components/Header/__logo/header__logo.css);
 @import url(./components/Header/__menu/header__menu.css);
 @import url(./components/Header/__menu-item/header__menu-item.css);
@@ -99,6 +100,7 @@
 @import url(./components/Navigation/__movies/navigation__movies.css);
 @import url(./components/Navigation/__menu-item/navigation__menu-item.css);
 @import url(./components/Navigation/__menu-item/_type/navigation__menu-item_type_normal.css);
+@import url(./components/Navigation/__menu-item/_type/navigation__menu-item_type_loggedin.css);
 @import url(./components/Navigation/__profile/navigation__profile.css);
 @import url(./components/Navigation/__profile-icon/navigation__profile-icon.css);
 

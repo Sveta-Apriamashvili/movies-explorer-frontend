@@ -1,12 +1,9 @@
 import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import Preloader from "../Preloader/Preloader";
-
 
 function MoviesCardList(props) {
     return (
         <ul className="movies-card-list">
-            {/* <Preloader/> */}
             {props.searchResults.map((item) => {
                 return (
                     <MoviesCard
@@ -15,7 +12,6 @@ function MoviesCardList(props) {
                         isSaved={props.savedMovies.some((i) => {
                             return i.movieId === `${item.id}` ? true : false
                         })}
-                        isSavedMovies={props.isSavedMovies}
                         handleSaveMovie={props.handleSaveMovie}
                         handleDeleteMovie={props.handleDeleteMovie}
                     />

@@ -14,6 +14,9 @@ import SideBarMenu from '../SideBarMenu/SideBarMenu';
 import * as mainApi from '../../utils/MainApi';
 import * as moviesApi from '../../utils/MoviesApi';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import Preloader from '../Preloader/Preloader';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { filterMovies, filterMoviesByDuration } from '../../utils/filterMovies';
 
 function App() {
   const headerExclusionPaths = [
@@ -33,7 +36,8 @@ function App() {
   const [movies, setMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [localData, setLocalData] = React.useState([]);
-  // const [loader, setLoader] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [isShortfilmCheckboxOn, setIsShortfilmCheckboxOn] = React.useState(false);
 
   const history = useHistory();
 
@@ -51,6 +55,7 @@ function App() {
     mainApi.checkToken()
       .then(() => setIsLoggedIn(true))
       .catch(() => console.log('error'))
+      .finally(() => { setIsLoading(false) })
   }, []);
 
   React.useEffect(() => {
@@ -92,29 +97,60 @@ function App() {
       .catch(() => console.log('error'))
   }
 
-  // Search movie
+  // Search all movies
 
   function handleSearchFormSubmit(search) {
     setTimeout(() => {
-      const filteredMovies = localData.filter((item) => {
-        const filtered = item.nameRU
-          .toLowerCase()
-          .includes(search.movie.toLowerCase());
-        return filtered;
-      });
-
+      const filteredMovies = filterMovies(search.movie, isShortfilmCheckboxOn, localData)
       localStorage.setItem('filtered', JSON.stringify(filteredMovies));
 
       setMovies(filteredMovies);
     }, 1000);
   }
 
+  function toggleCheckbox() {
+    if (!isShortfilmCheckboxOn) {
+      const shortMovies = movies.filter(filterMoviesByDuration)
+      setIsShortfilmCheckboxOn(true);
+      setMovies(shortMovies)
+    }
+    else {
+      setIsShortfilmCheckboxOn(false);
+      const prevState = JSON.parse(localStorage.getItem('filtered'));
+      setMovies(prevState);
+    }
+  };
+
+  // Search saved movies
+
+  function handleSavedMoviesSearchFormSubmit(search) {
+    setTimeout(() => {
+      const filteredMovies = filterMovies(search.movie, isShortfilmCheckboxOn, savedMovies)
+      localStorage.setItem('savedFilter', JSON.stringify(filteredMovies));
+
+      setSavedMovies(filteredMovies);
+    }, 1000);
+  }
+
+  function toggleSavedMoviesCheckbox() {
+    if (!isShortfilmCheckboxOn) {
+      const shortMovies = savedMovies.filter(filterMoviesByDuration)
+      setIsShortfilmCheckboxOn(true);
+      localStorage.setItem('savedFilter', JSON.stringify(savedMovies));
+      setSavedMovies(shortMovies)
+    }
+    else {
+      setIsShortfilmCheckboxOn(false);
+      const prevState = JSON.parse(localStorage.getItem('savedFilter'));
+      setSavedMovies(prevState);
+    }
+  };
+
   //Save movie, delete movie
 
   const toggleMovieStatus = (movie) => {
     const movieId = `${movie.id}`
     const isSaved = savedMovies.some((i) => i.movieId === movieId);
-
     if (isSaved) {
       handleDeleteMovie(movieId)
     } else {
@@ -126,8 +162,6 @@ function App() {
     mainApi.saveMovie(movie)
       .then((res) => {
         const tmpSavedMovies = savedMovies.concat([res])
-        console.log(res._id)
-        console.log(savedMovies.map((m) => m._id))
         localStorage.setItem('savedMovies', JSON.stringify(tmpSavedMovies));
         setSavedMovies(tmpSavedMovies);
       })
@@ -157,7 +191,6 @@ function App() {
       .getMovies()
       .then((res) => {
         const ownedSavedMovies = res.filter((x) => x.owner === currentUser._id)
-        console.log(`owned movies: ${ownedSavedMovies}`);
         localStorage.setItem('savedMovies', JSON.stringify(ownedSavedMovies));
         const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
         setSavedMovies(savedMovies);
@@ -212,48 +245,61 @@ function App() {
             isLoggedIn={isLoggedIn}
           />)
         }
-        <Switch>
-          <Route exact path="/">
-            <Main
+        {isLoading
+          ? <Preloader />
+          : <Switch>
+            <Route exact path="/">
+              <Main
+                isLoggedIn={isLoggedIn}
+              />
+            </Route>
+            <ProtectedRoute
+              component={Movies}
+              path="/movies"
               isLoggedIn={isLoggedIn}
-            />
-          </Route>
-          <Route path="/movies">
-            <Movies
               searchResults={movies}
               savedMovies={savedMovies}
               onSubmit={handleSearchFormSubmit}
               handleSaveMovie={toggleMovieStatus}
-            // loader={loader}
-            />
-          </Route>
-          <Route path="/saved-movies">
-            <SavedMovies
+              onCheckbox={toggleCheckbox}
+              isChecked={isShortfilmCheckboxOn}
+            >
+            </ProtectedRoute>
+            <ProtectedRoute
+              component={SavedMovies}
+              path="/saved-movies"
+              isLoggedIn={isLoggedIn}
               searchResults={savedMovies}
               savedMovies={savedMovies}
               handleDeleteMovie={handleDeleteMovie}
-            />
-          </Route>
-          <Route path="/profile">
-            <Profile
+              onSubmit={handleSavedMoviesSearchFormSubmit}
+              onCheckbox={toggleSavedMoviesCheckbox}
+              isChecked={isShortfilmCheckboxOn}
+            >
+            </ProtectedRoute>
+            <ProtectedRoute
+              component={Profile}
+              path="/profile"
+              isLoggedIn={isLoggedIn}
               onUpdateUser={handleUpdateUser}
               onSignOut={handleSignOut}
-            />
-          </Route>
-          <Route path="/signin">
-            <Login
-              onLogin={onLogin}
-            />
-          </Route>
-          <Route path="/signup">
-            <Register
-              onRegister={onRegister}
-            />
-          </Route>
-          <Route path="*">
-            <PageNotFound />
-          </Route>
-        </Switch>
+            >
+            </ProtectedRoute>
+            <Route path="/signin">
+              <Login
+                onLogin={onLogin}
+              />
+            </Route>
+            <Route path="/signup">
+              <Register
+                onRegister={onRegister}
+              />
+            </Route>
+            <Route path="*">
+              <PageNotFound />
+            </Route>
+          </Switch>
+        }
         {useRouteMatch(footerExclusionPaths) ? null :
           (<Footer />)
         }

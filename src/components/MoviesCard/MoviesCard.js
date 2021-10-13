@@ -1,9 +1,11 @@
 import React from "react";
+import { useLocation } from "react-router";
 import convertDuration from "../../utils/convertDuration";
 import convertMovieImageURL from "../../utils/convertMovieImageURL";
 
 function MoviesCard(props) {
-    const isSavedMovies = props.isSavedMovies;
+    const location = useLocation()
+    const isSavedMovies = location.pathname === '/saved-movies';
     const cardSaveButtonClassName = (`moviescard__save-button ${isSavedMovies ? 'moviescard__save-button_type_delete' : (props.isSaved ? 'moviescard__save-button_type_active' : '')} `);
 
     function handleButtonClick() {
@@ -23,7 +25,9 @@ function MoviesCard(props) {
                 </div>
                 <button className={cardSaveButtonClassName} onClick={handleButtonClick}></button>
             </div>
+            <a href={props.card.trailer}  target="_blank" rel="noReferrer">
             <img className="moviescard__image" alt={props.card.nameRU} src={convertMovieImageURL(props.card.image)} />
+            </a>
         </li>
     )
 }

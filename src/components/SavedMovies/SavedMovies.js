@@ -6,11 +6,15 @@ function SavedMovies(props) {
     
     return (
         <section className="movies">
-            <SearchForm />
+            <SearchForm 
+         onSubmit={props.onSubmit}
+         onCheckbox={props.onCheckbox}
+        isChecked={props.isShortfilmCheckboxOn}
+
+            />
             <MoviesCardList 
             searchResults={props.searchResults} 
             savedMovies={props.savedMovies}
-            isSavedMovies={true} 
             handleDeleteMovie={props.handleDeleteMovie}/>
         </section>
     )
