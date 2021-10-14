@@ -110,6 +110,7 @@
 @import url(./components/SearchForm/__item/search-form__item.css);
 @import url(./components/SearchForm/__submit-button/search-form__submit-button.css);
 @import url(./components/SearchForm/__error/search-form__error.css);
+@import url(./components/Form/__error-message/form__error-message.css);
 
 @import url(./components/FilterSlider/FilterSlider.css);
 @import url(./components/FilterSlider/__checkbox/filter-slider__checkbox.css);
@@ -117,6 +118,7 @@
 @import url(./components/FilterSlider/__slider/filter-slider__slider.css);
 
 @import url(./components/Movies/Movies.css);
+@import url(./components/Movies/__message/movies__message.css);
 @import url(./components/Movies/__button/movies__button.css);
 @import url(./components/MoviesCardList/MoviesCardList.css);
 @import url(./components/MoviesCard/MoviesCard.css);

@@ -17,6 +17,8 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import Preloader from '../Preloader/Preloader';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { filterMovies, filterMoviesByDuration } from '../../utils/filterMovies';
+import { useWindowSize } from '../../hooks/useWindowSize';
+import { getCardsRendering } from '../../utils/cardsRendering';
 
 function App() {
   const headerExclusionPaths = [
@@ -34,12 +36,16 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({});
   const [movies, setMovies] = React.useState([]);
+  const [shownMovies, setShownMovies] = React.useState([]);
   const [savedMovies, setSavedMovies] = React.useState([]);
   const [localData, setLocalData] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [isShortfilmCheckboxOn, setIsShortfilmCheckboxOn] = React.useState(false);
+  const [noMoviesFound, setNoMoviesFound] = React.useState(false);
+  const [cardsRendering, setCardsRendering] = React.useState({total: 12, add: 3});
 
   const history = useHistory();
+  const { width } = useWindowSize();
 
   function handleBurgerMenuClick() {
     setIsSideBarMenuOpened(true);
@@ -104,7 +110,14 @@ function App() {
       const filteredMovies = filterMovies(search.movie, isShortfilmCheckboxOn, localData)
       localStorage.setItem('filtered', JSON.stringify(filteredMovies));
 
+      if (filteredMovies.length === 0) {
+        setNoMoviesFound(true);
+      } else {
+        setNoMoviesFound(false);
+      }
+
       setMovies(filteredMovies);
+      setShownMovies(filteredMovies.slice(0, cardsRendering.total))
     }, 1000);
   }
 
@@ -113,12 +126,19 @@ function App() {
       const shortMovies = movies.filter(filterMoviesByDuration)
       setIsShortfilmCheckboxOn(true);
       setMovies(shortMovies)
+      setShownMovies(shortMovies.slice(0, cardsRendering.total))
     }
     else {
       setIsShortfilmCheckboxOn(false);
       const prevState = JSON.parse(localStorage.getItem('filtered'));
       setMovies(prevState);
+      setShownMovies(prevState.slice(0, cardsRendering.total))
     }
+  };
+
+  const handleClickLoadMoreMovies = (index, limit) => {
+    const newShownMovies = movies.slice(index, index + limit)
+    setShownMovies(newShownMovies)
   };
 
   // Search saved movies
@@ -235,10 +255,13 @@ function App() {
     }
   }, [isLoggedIn]);
 
+  React.useEffect(() => {
+    setCardsRendering(getCardsRendering(width));
+  }, [width]);
+
   return (
     <div className="page__container">
       <CurrentUserContext.Provider value={currentUser}>
-
         {useRouteMatch(headerExclusionPaths) ? null :
           (<Header
             onBurgerMenu={handleBurgerMenuClick}
@@ -257,12 +280,16 @@ function App() {
               component={Movies}
               path="/movies"
               isLoggedIn={isLoggedIn}
-              searchResults={movies}
+              allMovies={movies}
+              searchResults={shownMovies}
               savedMovies={savedMovies}
-              onSubmit={handleSearchFormSubmit}
-              handleSaveMovie={toggleMovieStatus}
-              onCheckbox={toggleCheckbox}
+              cardsRendering={cardsRendering}
               isChecked={isShortfilmCheckboxOn}
+              noMoviesFound={noMoviesFound}
+              onSubmit={handleSearchFormSubmit}
+              onShowMoreMoviesClick={handleClickLoadMoreMovies}
+              onCheckbox={toggleCheckbox}
+              onSaveMovie={toggleMovieStatus}
             >
             </ProtectedRoute>
             <ProtectedRoute

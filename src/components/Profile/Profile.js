@@ -6,7 +6,7 @@ import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
 function Profile(props) {
     const currentUser = React.useContext(CurrentUserContext);
-    // const [isEdited, setIsEdited] = React.useState(false);
+    const [isEdited, setIsEdited] = React.useState(false);
 
     const {
         values,
@@ -26,6 +26,14 @@ function Profile(props) {
         resetForm({ name: currentUser.name, email: currentUser.email });
       }, [currentUser]);
 
+      React.useEffect(() => {
+        if (currentUser.name === values.name && currentUser.email === values.email) {
+            setIsEdited(false);
+        } else {
+            setIsEdited(true);
+        }
+      }, [currentUser, values]);
+
     return (
 
         <div className="profile">
@@ -41,7 +49,7 @@ function Profile(props) {
                     <input className="profile__item" id="email" name="email" type="email" onChange={handleChange} value={values["email"]} />
                     <span className="profile__error">{errors["email"]}</span>
                 </div>
-                <button className="profile__submit-button" type="submit" onClick={handleSubmit} disabled={!isValid}>Редактировать</button>
+                <button className="profile__submit-button" type="submit" onClick={handleSubmit} disabled={!isValid || !isEdited}>Редактировать</button>
             </form>
             <Link to="/" className="profile__logout-link" onClick={props.onSignOut}>Выйти из аккаунта</Link>
         </div>
