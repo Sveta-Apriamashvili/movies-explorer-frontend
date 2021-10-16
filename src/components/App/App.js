@@ -94,7 +94,6 @@ function App() {
       .then(res => {
         localStorage.setItem('currentUser', JSON.stringify(res));
         setCurrentUser(res)
-        console.log('Ваш профиль был успешно обновлен')
       })
       .then(() => {
         setProfileFormMessage(profileErrorMessages.SUCCESS);

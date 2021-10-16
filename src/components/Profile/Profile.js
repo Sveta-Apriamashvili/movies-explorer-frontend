@@ -8,6 +8,8 @@ function Profile(props) {
     const currentUser = React.useContext(CurrentUserContext);
     const [isEdited, setIsEdited] = React.useState(false);
 
+    const emailPattern = '^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\\.)+[A-Za-z]+$';
+
     const {
         values,
         errors,
@@ -46,7 +48,7 @@ function Profile(props) {
                 </div>
                 <div className="profile__input-items">
                     <label className="profile__form-label">E-mail</label>
-                    <input className="profile__item" id="email" name="email" type="email" onChange={handleChange} value={values["email"]} />
+                    <input className="profile__item" id="email" name="email" type="email" onChange={handleChange} value={values["email"]} pattern={emailPattern} />
                     <span className="profile__error">{errors["email"]}</span>
                 </div>
                 <span className="profile__error-message">{props.profileMessage}</span>
