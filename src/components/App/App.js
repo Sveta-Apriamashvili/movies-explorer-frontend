@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import Footer from '../Footer/Footer';
-import { Route, Switch, useRouteMatch, useHistory } from 'react-router-dom';
+import { Route, Switch, useRouteMatch, useHistory, Redirect } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import './App.css';
@@ -19,6 +19,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { filterMovies, filterMoviesByDuration } from '../../utils/filterMovies';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { getCardsRendering } from '../../utils/cardsRendering';
+import {profileErrorMessages} from '../../utils/constants';
 
 function App() {
   const headerExclusionPaths = [
@@ -42,7 +43,10 @@ function App() {
   const [isLoading, setIsLoading] = React.useState(true);
   const [isShortfilmCheckboxOn, setIsShortfilmCheckboxOn] = React.useState(false);
   const [noMoviesFound, setNoMoviesFound] = React.useState(false);
-  const [cardsRendering, setCardsRendering] = React.useState({total: 12, add: 3});
+  const [noSavedMoviesFound, setNoSavedMoviesFound] = React.useState(false);
+  const [cardsRendering, setCardsRendering] = React.useState({ total: 12, add: 3 });
+  const [profileFormMessage, setProfileFormMessage] = React.useState('');
+
 
   const history = useHistory();
   const { width } = useWindowSize();
@@ -88,9 +92,22 @@ function App() {
   function handleUpdateUser(data) {
     mainApi.editUserInfo(data)
       .then(res => {
+        localStorage.setItem('currentUser', JSON.stringify(res));
         setCurrentUser(res)
+        console.log('Ваш профиль был успешно обновлен')
       })
-      .catch(() => console.log('error'))
+      .then(() => {
+        setProfileFormMessage(profileErrorMessages.SUCCESS);
+      })
+      .catch((err) => {
+        switch (err) {
+          case 409:
+            setProfileFormMessage(profileErrorMessages.CONFLICT);
+            break;
+          default:
+            setProfileFormMessage(profileErrorMessages.BAD_REQUEST);
+        }
+      })
   }
 
   function handleSignOut() {
@@ -137,7 +154,7 @@ function App() {
   };
 
   const handleClickLoadMoreMovies = (index, limit) => {
-    const newShownMovies = movies.slice(index, index + limit)
+    const newShownMovies = movies.slice(0, index + limit)
     setShownMovies(newShownMovies)
   };
 
@@ -145,8 +162,15 @@ function App() {
 
   function handleSavedMoviesSearchFormSubmit(search) {
     setTimeout(() => {
-      const filteredMovies = filterMovies(search.movie, isShortfilmCheckboxOn, savedMovies)
+      const allSavedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+      const filteredMovies = filterMovies(search.movie, isShortfilmCheckboxOn, allSavedMovies)
       localStorage.setItem('savedFilter', JSON.stringify(filteredMovies));
+
+      if (filteredMovies.length === 0) {
+        setNoSavedMoviesFound(true);
+      } else {
+        setNoSavedMoviesFound(false);
+      }
 
       setSavedMovies(filteredMovies);
     }, 1000);
@@ -210,7 +234,8 @@ function App() {
     mainApi
       .getMovies()
       .then((res) => {
-        const ownedSavedMovies = res.filter((x) => x.owner === currentUser._id)
+        const storedCurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const ownedSavedMovies = res.filter((x) => x.owner === storedCurrentUser._id);
         localStorage.setItem('savedMovies', JSON.stringify(ownedSavedMovies));
         const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
         setSavedMovies(savedMovies);
@@ -302,6 +327,8 @@ function App() {
               onSubmit={handleSavedMoviesSearchFormSubmit}
               onCheckbox={toggleSavedMoviesCheckbox}
               isChecked={isShortfilmCheckboxOn}
+              noMoviesFound={noSavedMoviesFound}
+
             >
             </ProtectedRoute>
             <ProtectedRoute
@@ -310,17 +337,24 @@ function App() {
               isLoggedIn={isLoggedIn}
               onUpdateUser={handleUpdateUser}
               onSignOut={handleSignOut}
+              profileMessage={profileFormMessage}
             >
             </ProtectedRoute>
             <Route path="/signin">
-              <Login
-                onLogin={onLogin}
-              />
+              {isLoggedIn
+                ? <Redirect to='/movies' />
+                :
+                <Login
+                  onLogin={onLogin}
+                />}
             </Route>
             <Route path="/signup">
-              <Register
-                onRegister={onRegister}
-              />
+              {isLoggedIn
+                ? <Redirect to='/movies' />
+                :
+                <Register
+                  onRegister={onRegister}
+                />}
             </Route>
             <Route path="*">
               <PageNotFound />

@@ -6,7 +6,7 @@ function Form(props) {
 
     return (
         <div className="form">
-            <img src={logo_auth} className="form__logo" alt="лого" />
+            <Link to="/"><img src={logo_auth} className="form__logo" alt="лого" /></Link>
             <h1 className="form__title">{props.title}</h1>
             <form className="form__container" onSubmit={props.onSubmit}>
                 {props.inputs.map((item) => (

@@ -11,7 +11,8 @@ function Login(props) {
       label: 'E-mail',
       id: 'email',
       name: 'email',
-      type: 'email'
+      type: 'email',
+      pattern: '^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\\.)+[A-Za-z]+$'
     },
     {
       key: 2,

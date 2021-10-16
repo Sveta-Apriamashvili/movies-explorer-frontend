@@ -13,7 +13,7 @@ function Movies(props) {
 
   function handleMoreButtonClick() {
     let numberOfMoviesToAdd = props.cardsRendering.add;
-    if (numberOfAllMovies < numberOfShownMovies + numberOfMoviesToAdd) {
+    if (numberOfAllMovies > numberOfShownMovies + numberOfMoviesToAdd) {
       props.onShowMoreMoviesClick(numberOfShownMovies, numberOfMoviesToAdd)
     } else {
       numberOfMoviesToAdd = numberOfAllMovies - numberOfShownMovies
@@ -45,6 +45,7 @@ function Movies(props) {
       }
     </section>
   )
+
 }
 
 export default Movies
