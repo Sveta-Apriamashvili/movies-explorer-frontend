@@ -23,6 +23,13 @@ function Profile(props) {
         props.onUpdateUser(values);
     }
 
+    function handleChangeOverride(e) {
+        handleChange(e)
+        if (props.profileMessage.length > 0) {
+            props.resetFormErrorMessage();   
+        }
+    }
+
 
     React.useEffect(() => {
         resetForm({ name: currentUser.name, email: currentUser.email });
@@ -36,9 +43,9 @@ function Profile(props) {
         }
       }, [currentUser, values]);
 
-      React.useEffect(() => {
-        props.resetFormErrorMessage();
-      }, [values]);
+    //   React.useEffect(() => {
+    //     props.resetFormErrorMessage();
+    //   }, [values]);
 
     return (
 
@@ -47,12 +54,12 @@ function Profile(props) {
             <form className="profile__form">
                 <div className="profile__input-items">
                     <label className="profile__form-label">Имя</label>
-                    <input className="profile__item" id="name" name="name" type="text" minLength = "2" maxLength = "30" pattern = "[A-Za-zА-ЯЁа-яё -]+" onChange={handleChange} value={values["name"]  } />
+                    <input className="profile__item" id="name" name="name" type="text" minLength = "2" maxLength = "30" pattern = "[A-Za-zА-ЯЁа-яё -]+" onChange={handleChangeOverride} value={values["name"]  } />
                     <span className="profile__error">{errors["name"]}</span>
                 </div>
                 <div className="profile__input-items">
                     <label className="profile__form-label">E-mail</label>
-                    <input className="profile__item" id="email" name="email" type="email" onChange={handleChange} value={values["email"]} pattern={emailPattern} />
+                    <input className="profile__item" id="email" name="email" type="email" onChange={handleChangeOverride} value={values["email"]} pattern={emailPattern} />
                     <span className="profile__error">{errors["email"]}</span>
                 </div>
                 <p className="profile__update-message">{props.profileMessage}</p>
