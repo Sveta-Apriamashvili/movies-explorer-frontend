@@ -45,6 +45,10 @@ function Register(props) {
         props.onRegister(values)
     }
 
+    React.useEffect(() => {
+        props.resetFormErrorMessage();
+      }, [values]);
+
     return (
         <Form
             title="Добро пожаловать!"
@@ -58,6 +62,7 @@ function Register(props) {
             isValid={isValid}
             errors={errors}
             values={values}
+            formSubmitErrorMessage={props.formSubmitErrorMessage}
         />
     )
 }

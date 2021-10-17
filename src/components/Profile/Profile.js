@@ -36,6 +36,10 @@ function Profile(props) {
         }
       }, [currentUser, values]);
 
+      React.useEffect(() => {
+        props.resetFormErrorMessage();
+      }, [values]);
+
     return (
 
         <div className="profile">
@@ -51,7 +55,7 @@ function Profile(props) {
                     <input className="profile__item" id="email" name="email" type="email" onChange={handleChange} value={values["email"]} pattern={emailPattern} />
                     <span className="profile__error">{errors["email"]}</span>
                 </div>
-                <span className="profile__error-message">{props.profileMessage}</span>
+                <p className="profile__update-message">{props.profileMessage}</p>
                 <button className="profile__submit-button" type="submit" onClick={handleSubmit} disabled={!isValid || !isEdited}>Редактировать</button>
             </form>
             <Link to="/" className="profile__logout-link" onClick={props.onSignOut}>Выйти из аккаунта</Link>

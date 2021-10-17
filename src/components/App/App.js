@@ -19,7 +19,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { filterMovies, filterMoviesByDuration } from '../../utils/filterMovies';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { getCardsRendering } from '../../utils/cardsRendering';
-import {profileErrorMessages} from '../../utils/constants';
+import {profileErrorMessages, registrationErrorMessages, DEFAULT_ERROR_MESSAGE} from '../../utils/constants';
 
 function App() {
   const headerExclusionPaths = [
@@ -45,11 +45,15 @@ function App() {
   const [noMoviesFound, setNoMoviesFound] = React.useState(false);
   const [noSavedMoviesFound, setNoSavedMoviesFound] = React.useState(false);
   const [cardsRendering, setCardsRendering] = React.useState({ total: 12, add: 3 });
-  const [profileFormMessage, setProfileFormMessage] = React.useState('');
+  const [formSubmitErrorMessage, setFormSubmitErrorMessage] = React.useState('');
 
 
   const history = useHistory();
   const { width } = useWindowSize();
+
+  const resetAllFormErrorMessages = () => {
+    setFormSubmitErrorMessage('');
+  };
 
   function handleBurgerMenuClick() {
     setIsSideBarMenuOpened(true);
@@ -77,7 +81,18 @@ function App() {
       .then(() => {
         onLogin(data);
       })
-      .catch(console.log('error'))
+      .catch((err) => {
+        switch (err) {
+          case 400:
+            setFormSubmitErrorMessage(registrationErrorMessages.BAD_REQUEST);
+            break;
+          case 409:
+            setFormSubmitErrorMessage(registrationErrorMessages.CONFLICT);
+            break;
+          default:
+            setFormSubmitErrorMessage(DEFAULT_ERROR_MESSAGE);
+        }
+      })
   }
 
   function onLogin(data) {
@@ -96,15 +111,15 @@ function App() {
         setCurrentUser(res)
       })
       .then(() => {
-        setProfileFormMessage(profileErrorMessages.SUCCESS);
+        setFormSubmitErrorMessage(profileErrorMessages.SUCCESS);
       })
       .catch((err) => {
         switch (err) {
           case 409:
-            setProfileFormMessage(profileErrorMessages.CONFLICT);
+            setFormSubmitErrorMessage(profileErrorMessages.CONFLICT);
             break;
           default:
-            setProfileFormMessage(profileErrorMessages.BAD_REQUEST);
+            setFormSubmitErrorMessage(profileErrorMessages.BAD_REQUEST);
         }
       })
   }
@@ -336,7 +351,8 @@ function App() {
               isLoggedIn={isLoggedIn}
               onUpdateUser={handleUpdateUser}
               onSignOut={handleSignOut}
-              profileMessage={profileFormMessage}
+              profileMessage={formSubmitErrorMessage}
+              resetFormErrorMessage={resetAllFormErrorMessages}
             >
             </ProtectedRoute>
             <Route path="/signin">
@@ -353,6 +369,8 @@ function App() {
                 :
                 <Register
                   onRegister={onRegister}
+                  formSubmitErrorMessage={formSubmitErrorMessage}
+                  resetFormErrorMessage={resetAllFormErrorMessages}
                 />}
             </Route>
             <Route path="*">

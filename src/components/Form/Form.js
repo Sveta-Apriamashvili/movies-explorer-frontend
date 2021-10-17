@@ -16,6 +16,7 @@ function Form(props) {
                             maxLength={item.maxLength} pattern={item.pattern} required onChange={props.onChange} value={props.values[item.name]} />
                         <span className="form__error">{props.errors[item.name]}</span>
                     </div>))}
+                    <p className="form__submit-error-message">{props.formSubmitErrorMessage}</p>
                 <button className="form__submit-button" type="submit" disabled={!props.isValid}>{props.button}</button>
             </form>
             <div className="form__bottom-text">
