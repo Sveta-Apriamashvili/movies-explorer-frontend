@@ -3,6 +3,7 @@
     border-bottom: 1px solid #E8E8E8;
     padding-bottom: 16px;
     padding-top: 17px;
+    position: relative;
 }
 
 .profile__input-items:last-of-type {

@@ -1,0 +1,10 @@
+.profile__error {
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+    display: block;
+    position: absolute;
+    text-align: left;
+    bottom: 1px;
+    white-space: nowrap;
+}

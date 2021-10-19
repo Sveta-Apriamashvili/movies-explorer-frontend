@@ -1,7 +1,8 @@
 import React from "react";
 import Form from "../Form/Form";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
-function Register() {
+function Register(props) {
 
     const inputs = [{
         key: 1,
@@ -10,14 +11,16 @@ function Register() {
         name: 'name',
         type: 'text',
         minLength: 2,
-        maxLength:30
+        maxLength: 30,
+        pattern: '[A-Za-zА-ЯЁа-яё -]+'
     },
     {
         key: 2,
         label: 'E-mail',
         id: 'email',
         name: 'email',
-        type: 'email'
+        type: 'email',
+        pattern: '^[a-zA-Z0-9]+@(?:[a-zA-Z0-9]+\\.)+[A-Za-z]+$'
 
     },
     {
@@ -29,14 +32,37 @@ function Register() {
         minLength: 8
     }]
 
+    const {
+        values,
+        errors,
+        isValid,
+        handleChange,
+    } = useFormWithValidation({});
+
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        props.onRegister(values)
+    }
+
+    React.useEffect(() => {
+        props.resetFormErrorMessage();
+      }, [values]);
+
     return (
         <Form
             title="Добро пожаловать!"
             inputs={inputs}
-            button = "Зарегистрироваться"
-            text = "Уже зарегистрированы?"
-            link_address = "/signin"
-            link_name = "Войти"
+            button="Зарегистрироваться"
+            text="Уже зарегистрированы?"
+            link_address="/signin"
+            link_name="Войти"
+            onSubmit={handleSubmit}
+            onChange={handleChange}
+            isValid={isValid}
+            errors={errors}
+            values={values}
+            formSubmitErrorMessage={props.formSubmitErrorMessage}
         />
     )
 }

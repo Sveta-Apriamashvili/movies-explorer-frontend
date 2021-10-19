@@ -6,6 +6,7 @@
 
 @import url(./components/Header/Header.css);
 @import url(./components/Header/_type/header_type_logged-in.css);
+@import url(./components/Header/_type/header_type_logged-in_main.css);
 @import url(./components/Header/__logo/header__logo.css);
 @import url(./components/Header/__menu/header__menu.css);
 @import url(./components/Header/__menu-item/header__menu-item.css);
@@ -82,6 +83,8 @@
 @import url(./components/Form/__submit-button/form__submit-button.css);
 @import url(./components/Form/__bottom-text/form__bottom-text.css);
 @import url(./components/Form/__bottom-text/_type/form__bottom-text_type_link.css);
+@import url(./components/Form/__error/form__error.css);
+@import url(./components/Form/__submit-error-message/form__submit-error-message.css);
 
 @import url(./components/Profile/Profile.css);
 @import url(./components/Profile/__form/profile__form.css);
@@ -91,12 +94,15 @@
 @import url(./components/Profile/__item/profile__item.css);
 @import url(./components/Profile/__submit-button/profile__submit-button.css);
 @import url(./components/Profile/__logout-link/profile__logout-link.css);
+@import url(./components/Profile/__error/profile__error.css);
+@import url(./components/Profile/__update-message/profile__update-message.css);
 
 @import url(./components/Navigation/Navigation.css);
 @import url(./components/Navigation/__menu/navigation__menu.css);
 @import url(./components/Navigation/__movies/navigation__movies.css);
 @import url(./components/Navigation/__menu-item/navigation__menu-item.css);
 @import url(./components/Navigation/__menu-item/_type/navigation__menu-item_type_normal.css);
+@import url(./components/Navigation/__menu-item/_type/navigation__menu-item_type_loggedin.css);
 @import url(./components/Navigation/__profile/navigation__profile.css);
 @import url(./components/Navigation/__profile-icon/navigation__profile-icon.css);
 
@@ -105,6 +111,8 @@
 @import url(./components/SearchForm/__input-container/search-form__input-container.css);
 @import url(./components/SearchForm/__item/search-form__item.css);
 @import url(./components/SearchForm/__submit-button/search-form__submit-button.css);
+@import url(./components/SearchForm/__error/search-form__error.css);
+@import url(./components/Form/__error-message/form__error-message.css);
 
 @import url(./components/FilterSlider/FilterSlider.css);
 @import url(./components/FilterSlider/__checkbox/filter-slider__checkbox.css);
@@ -112,6 +120,7 @@
 @import url(./components/FilterSlider/__slider/filter-slider__slider.css);
 
 @import url(./components/Movies/Movies.css);
+@import url(./components/Movies/__message/movies__message.css);
 @import url(./components/Movies/__button/movies__button.css);
 @import url(./components/MoviesCardList/MoviesCardList.css);
 @import url(./components/MoviesCard/MoviesCard.css);

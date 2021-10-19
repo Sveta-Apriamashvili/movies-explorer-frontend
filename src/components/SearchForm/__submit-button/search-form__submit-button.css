@@ -14,3 +14,8 @@
     cursor: pointer;
     opacity: 0.8;
 }
+
+.search-form__submit-button:disabled {
+    cursor: default;
+    background-color: #F2F2F2;
+}

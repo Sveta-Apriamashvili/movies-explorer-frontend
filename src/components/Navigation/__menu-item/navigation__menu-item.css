@@ -6,3 +6,8 @@
     font-weight: 500;
     align-self: center;
 }
+
+.navigation__menu-item:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
