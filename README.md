@@ -1,6 +1,9 @@
 # movies-explorer-frontend
 
-Фронтенд приложения проекта `Movies` 
+React-app where users can search movie and save it to the favorites
 
-* [Ссылка на макет](https://www.figma.com/file/pYRZR8rt470ZyjciucuZeU/Diploma_Sveta?node-id=891%3A3857)
-* Домен сервера для проверки: https://study.movies.nomoredomains.club/
+* Using third-party API for the movies collection
+* Authorisation/authentification/logout
+* Save/unsave movies
+
+[Click here to visit the website](https://study.movies.nomoredomains.club/)
